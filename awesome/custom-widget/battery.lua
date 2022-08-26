@@ -13,9 +13,12 @@ battery_widget:set_widget(battery_text)
 battery_widget:set_bg("#000000") --The background color
 battery_widget:set_fg("#ffffff") --The text color
 
-awful.widget.watch('acpi -b | grep "Battery 0:" ', 15,
+awful.widget.watch("acpi -b", 1,
                    function(widget, stdout, stderr, exitreason, exitcode)
-                     battery_text:set_text(stdout)
+                     local bat = string.match(stdout, "[A-Za-z]+, [0-9]+%p, [0-9]+")
+                     bat = string.sub(bat, 1, -5)
+                     bat = bat.."🔋"
+                     battery_text:set_text(bat)
                    end
 ,battery_widget
 )
