@@ -1,42 +1,73 @@
-! special
-*.cursorColor:  #d6cfdd
+!Randomly generated theme
+!! special
+!*.cursorColor:  #d6cfdd
+!*.background:	[90]#0e0911
+!*.foreground:   white
 
-! black
-*.color0:       #17111c
-*.color8:       #cba076
+!! black
+!*.color0:       #17111c
+!*.color8:       #cba076
 
-! red
-*.color1:       #211a28
-*.color9:       #99b478
+!! red
+!*.color1:       #211a28
+!*.color9:       #99b478
 
-! green
-*.color2:       #352a3d
-*.color10:      #80acc4
+!! green
+!*.color2:       #352a3d
+!*.color10:      #80acc4
 
-! yellow
-*.color3:       #4f405b
-*.color11:      #ee97b7
+!! yellow
+!*.color3:       #4f405b
+!*.color11:      #ee97b7
 
-! blue
-*.color4:       #715c81
-*.color12:      #c1a2d9
+!! blue
+!*.color4:       #715c81
+!*.color12:      #c1a2d9
 
-! magenta
-*.color5:       #9580a7
-*.color13:      #5fa1c0
+!! magenta
+!*.color5:       #9580a7
+!*.color13:      #5fa1c0
 
-! cyan
-*.color6:       #bbadc6
-*.color14:      #dc98b0
+!! cyan
+!*.color6:       #bbadc6
+!*.color14:      #dc98b0
 
-! white
-*.color7:       #e5e1ea
-*.color15:      #cfa377
+!! white
+!*.color7:       #e5e1ea
+!*.color15:      #cfa377
+
+!Gruvbox-dark
+! hard contrast: *background: #1d2021
+*background: [85]#282828
+! soft contrast: *background: #32302f
+*foreground: #ebdbb2
+! Black + DarkGrey
+*color0:  #282828
+*color8:  #928374
+! DarkRed + Red
+*color1:  #cc241d
+*color9:  #fb4934
+! DarkGreen + Green
+*color2:  #98971a
+*color10: #b8bb26
+! DarkYellow + Yellow
+*color3:  #d79921
+*color11: #fabd2f
+! DarkBlue + Blue
+*color4:  #458588
+*color12: #83a598
+! DarkMagenta + Magenta
+*color5:  #b16286
+*color13: #d3869b
+! DarkCyan + Cyan
+*color6:  #689d6a
+*color14: #8ec07c
+! LightGrey + White
+*color7:  #a89984
+*color15: #ebdbb2
 
 URxvt.scrollBar:        false
 URxvt.font:             xft:monospace:pixelsize=18
 URxvt.boldFont:         xft:monospace:bold:pixelsize=18
 URxvt.letterSpace:      -1
-URxvt.background:       [90]#0e0911
-URxvt.foreground:   	white
 URxvt.depth:            32
