@@ -588,6 +588,7 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 -- Autostart
 awful.spawn.with_shell("nitrogen --restore")
 awful.spawn.with_shell("picom -b")
+awful.spawn.with_shell("emacs --daemon &")
 
 --Gaps
 beautiful.useless_gap = 4

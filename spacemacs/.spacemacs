@@ -41,12 +41,13 @@ This function should only modify configuration layer settings."
      ;; `M-m f e R' (Emacs style) to install them.
      ;; ----------------------------------------------------------------
      auto-completion
+     cmake
      ;; compleseus
      ;; better-defaults
      emacs-lisp
      ;; git
      helm
-     lsp
+     ;; lsp ;; enable for autocompletion
      ;; markdown
      multiple-cursors
      ;; unicode-fonts
@@ -245,7 +246,8 @@ It should only modify the values of Spacemacs settings."
    ;;dotspacemacs-themes '(spacemacs-dark
    ;;                      spacemacs-light)
 
-   dotspacemacs-themes '(tsdh-dark
+   dotspacemacs-themes '(wombat
+                         tsdh-dark
    			 manoj-dark)
 
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
@@ -423,7 +425,7 @@ It should only modify the values of Spacemacs settings."
    ;;   :size-limit-kb 1000)
    ;; When used in a plist, `visual' takes precedence over `relative'.
    ;; (default nil)
-   dotspacemacs-line-numbers 'relative 
+   dotspacemacs-line-numbers 'visual 
 
    ;; Code folding method. Possible values are `evil', `origami' and `vimish'.
    ;; (default 'evil)
@@ -544,6 +546,7 @@ default it calls `spacemacs/load-spacemacs-env' which loads the environment
 variables declared in `~/.spacemacs.env' or `~/.spacemacs.d/.spacemacs.env'.
 See the header of this file for more information."
   (spacemacs/load-spacemacs-env)
+
 )
 
 (defun dotspacemacs/user-init ()
@@ -560,7 +563,7 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
 This function is called only while dumping Spacemacs configuration. You can
 `require' or `load' the libraries of your choice that will be included in the
 dump."
-)
+  )
 
 
 (defun dotspacemacs/user-config ()
@@ -569,20 +572,26 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
+  (evil-leader/set-key "d d" 'spacemacs/frame-killer)
+  (evil-leader/set-key "d t" 'vterm)
 )
 
-;;utf-8 characters on emacs-nox
-(setq utf-translate-cjk-mode nil) ; disable CJK coding/encoding (Chinese/Japanese/Korean characters)
-(set-language-environment 'utf-8)
-(set-keyboard-coding-system 'utf-8-mac) ; For old Carbon emacs on OS X only
-(setq locale-coding-system 'utf-8)
-(set-default-coding-systems 'utf-8)
-(set-terminal-coding-system 'utf-8)
-(set-selection-coding-system
- (if (eq system-type 'windows-nt)
-     'utf-16-le  ;; https://rufflewind.com/2014-07-20/pasting-unicode-in-emacs-on-windows
-   'utf-8))
-(prefer-coding-system 'utf-8)
+(defun set-utf-8 ()
+  ;;utf-8 characters on emacs-nox
+  (set-language-environment 'utf-8)
+  (setq locale-coding-system 'utf-8)
+  (set-default-coding-systems 'utf-8)
+  (set-terminal-coding-system 'utf-8)
+  (prefer-coding-system 'utf-8)
+)
+
+(defun setup-frame-utf (frame)
+  (with-selected-frame frame
+        (set-utf-8)))
+
+(set-utf-8)
+;; call set-utf8 function for each new emacs client
+(add-hook 'after-make-frame-functions #'setup-frame-utf)
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
