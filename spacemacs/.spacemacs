@@ -70,7 +70,7 @@ This function should only modify configuration layer settings."
    ;; `dotspacemacs/user-config'. To use a local version of a package, use the
    ;; `:location' property: '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '()
+   dotspacemacs-additional-packages '(nord-theme)
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -246,9 +246,9 @@ It should only modify the values of Spacemacs settings."
    ;;dotspacemacs-themes '(spacemacs-dark
    ;;                      spacemacs-light)
 
-   dotspacemacs-themes '(wombat
-                         tsdh-dark
-   			 manoj-dark)
+   dotspacemacs-themes '(nord
+                         wombat
+   			                 manoj-dark)
 
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
    ;; `all-the-icons', `custom', `doom', `vim-powerline' and `vanilla'. The
@@ -266,7 +266,7 @@ It should only modify the values of Spacemacs settings."
    ;; Default font or prioritized list of fonts. The `:size' can be specified as
    ;; a non-negative integer (pixel size), or a floating-point (point size).
    ;; Point size is recommended, because it's device independent. (default 10.0)
-   dotspacemacs-default-font '("FiraCode Nerd Font"
+   dotspacemacs-default-font '("FantasqueSansMono Nerd Font Mono"
                                :size 16.0 
                                :weight normal
                                :width normal)
@@ -563,7 +563,7 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
 This function is called only while dumping Spacemacs configuration. You can
 `require' or `load' the libraries of your choice that will be included in the
 dump."
-  )
+)
 
 
 (defun dotspacemacs/user-config ()
@@ -574,6 +574,8 @@ Put your configuration code here, except for variables that should be set
 before packages are loaded."
   (evil-leader/set-key "d d" 'spacemacs/frame-killer)
   (evil-leader/set-key "d t" 'vterm)
+  (evil-leader/set-key "d e" 'eshell)
+  (evil-leader/set-key "d n" 'spacemacs/toggle-line-numbers)
 )
 
 (defun set-utf-8 ()
