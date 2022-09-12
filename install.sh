@@ -1,10 +1,10 @@
 mkdir $HOME/.config
 
 # Awesome
-mkdir $HOME/.config/awesome 2> /dev/null
-mkdir $HOME/.config/awesome/custom-widget 2> /dev/null
-ln $PWD/awesome/rc.lua $HOME/.config/awesome/rc.lua 2> /dev/null
-ln $PWD/awesome/custom-widget/battery.lua $HOME/.config/awesome/custom-widget/battery.lua 2> /dev/null
+mkdir $HOME/.config/awesome
+mkdir $HOME/.config/awesome/custom-widget
+ln $PWD/awesome/rc.lua $HOME/.config/awesome/rc.lua
+ln $PWD/awesome/custom-widget/battery.lua $HOME/.config/awesome/custom-widget/battery.lua
 
 # Fish
 mkdir $HOME/.config/fish
@@ -18,4 +18,4 @@ ln $PWD/fish/functions/fish_right_prompt.fish $HOME/.config/fish/functions/fish_
 ln $PWD/spacemacs/.spacemacs $HOME/.spacemacs
 
 # URXVT
-ln $PWD/urxvt/.Xdefaults $HOME/.Xdefaults 2> /dev/null
+ln $PWD/urxvt/.Xdefaults $HOME/.Xdefaults
