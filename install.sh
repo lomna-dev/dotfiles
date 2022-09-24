@@ -17,5 +17,9 @@ ln $PWD/fish/functions/fish_right_prompt.fish $HOME/.config/fish/functions/fish_
 # Spacemacs
 ln $PWD/spacemacs/.spacemacs $HOME/.spacemacs
 
+#TMUX
+mkdir $HOME/.config/tmux
+ln $PWD/tmux/tmux.conf $HOME/.config/tmux/tmux.conf
+
 # URXVT
 ln $PWD/urxvt/.Xdefaults $HOME/.Xdefaults
