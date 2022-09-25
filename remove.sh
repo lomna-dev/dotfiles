@@ -4,6 +4,9 @@ rm -r $HOME/.config/awesome
 #Fish
 rm -r $HOME/.config/fish
 
+#Konsole
+rm -r $HOME/.local/share/konsole
+
 #Spacemacs
 rm $HOME/.spacemacs
 

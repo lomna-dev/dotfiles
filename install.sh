@@ -14,6 +14,9 @@ ln $PWD/fish/fish_variables $HOME/.config/fish/fish_variables
 ln $PWD/fish/functions/fish_prompt.fish $HOME/.config/fish/functions/fish_prompt.fish
 ln $PWD/fish/functions/fish_right_prompt.fish $HOME/.config/fish/functions/fish_right_prompt.fish
 
+# Konsole
+cp -r $PWD/konsole $HOME/.local/share
+ 
 # Spacemacs
 ln $PWD/spacemacs/.spacemacs $HOME/.spacemacs
 
