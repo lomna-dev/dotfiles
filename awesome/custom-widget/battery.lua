@@ -15,9 +15,7 @@ battery_widget:set_fg("#ffffff") --The text color
 
 awful.widget.watch("acpi -b", 5,
                    function(widget, stdout, stderr, exitreason, exitcode)
-                     local bat = string.match(stdout, "[A-Za-z]+, [0-9]+%p, [0-9]+")
-                     bat = string.sub(bat, 1, -5)
-                     bat = bat.."🔋"
+                     local bat = string.match(stdout, "[A-Za-z]+ [A-Za-z]+, [0-9]+")
                      battery_text:set_text(bat)
                    end
 ,battery_widget

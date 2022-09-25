@@ -1,8 +1,8 @@
 ## PATH
 if status --is-login
 	source "/home/anmol/emsdk/emsdk_env.fish" # emscripten compiler
-  set -x PATH $PATH $HOME/.cargo/bin # Rust
-  set -x PATH $PATH /sbin
+	set -x PATH $PATH $HOME/.cargo/bin # Rust
+	set -x PATH $PATH /sbin
 end
 
 
@@ -11,5 +11,5 @@ alias em="emacsclient -c -a 'nvim'"
 
 #If the shell is interactive run neofetch
 if status --is-interactive
-	neofetch
+	$HOME/Documents/pfetch/pfetch
 end
