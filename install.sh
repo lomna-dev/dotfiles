@@ -20,9 +20,12 @@ cp -r $PWD/konsole $HOME/.local/share
 # Spacemacs
 ln $PWD/spacemacs/.spacemacs $HOME/.spacemacs
 
-#TMUX
+# TMUX
 mkdir $HOME/.config/tmux
 ln $PWD/tmux/tmux.conf $HOME/.config/tmux/tmux.conf
 
 # URXVT
 ln $PWD/urxvt/.Xdefaults $HOME/.Xdefaults
+
+# ZSH
+ln $PWD/zsh/.zshrc $HOME/.zshrc

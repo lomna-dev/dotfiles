@@ -32,16 +32,17 @@ This function should only modify configuration layer settings."
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(lua
+   '(;; html
+     ;; lua
      markdown
-     python
+     ;; python
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
      ;; `M-m f e R' (Emacs style) to install them.
      ;; ----------------------------------------------------------------
      auto-completion
-     cmake
+     ;; cmake
      ;; compleseus
      ;; better-defaults
      emacs-lisp
@@ -566,12 +567,14 @@ dump."
 )
 
 
+
 (defun dotspacemacs/user-config ()
   "Configuration for user code:
 This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
+  (eval-after-load 'tramp '(setenv "SHELL" "/bin/sh"))
   (evil-leader/set-key "d d" 'spacemacs/frame-killer)
   (evil-leader/set-key "d t" 'vterm)
   (evil-leader/set-key "d e" 'eshell)

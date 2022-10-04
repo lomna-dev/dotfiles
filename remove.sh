@@ -1,17 +1,20 @@
-#Awesome
+# Awesome
 rm -r $HOME/.config/awesome
 
-#Fish
+# Fish
 rm -r $HOME/.config/fish
 
-#Konsole
+# Konsole
 rm -r $HOME/.local/share/konsole
 
-#Spacemacs
+# Spacemacs
 rm $HOME/.spacemacs
 
-#TMUX
+# TMUX
 rm -r $HOME/.config/tmux
 
-#URXVT
+# URXVT
 rm $HOME/.Xdefaults
+
+# ZSH
+rm $HOME/.zshrc
