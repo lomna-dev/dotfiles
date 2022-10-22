@@ -1,6 +1,9 @@
 # Awesome
 rm -r $HOME/.config/awesome
 
+# Emacs
+rm -r $HOME/.emacs.d
+
 # Fish
 rm -r $HOME/.config/fish
 

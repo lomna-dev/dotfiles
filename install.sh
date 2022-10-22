@@ -6,6 +6,11 @@ mkdir $HOME/.config/awesome/custom-widget
 ln $PWD/awesome/rc.lua $HOME/.config/awesome/rc.lua
 ln $PWD/awesome/custom-widget/battery.lua $HOME/.config/awesome/custom-widget/battery.lua
 
+# Emacs
+mkdir $HOME/.emacs.d
+cp -r $PWD/emacs/swiper $HOME/.emacs.d/swiper
+ln $PWD/emacs/init.el $HOME/.emacs.d/init.el
+
 # Fish
 mkdir $HOME/.config/fish
 mkdir $HOME/.config/fish/functions

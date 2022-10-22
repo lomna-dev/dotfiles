@@ -20,7 +20,7 @@ if [[ -o login ]]; then
 fi
 
 # Aliases
-alias em="emacsclient -c -a 'nvim'"
+alias em="emacsclient -nw -c -a 'nvim'"
 alias ls="ls --color=auto"
 
 # If is interactive

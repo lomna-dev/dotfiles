@@ -7,7 +7,7 @@ end
 
 
 ## Alias 
-alias em="emacsclient -c -a 'nvim'"
+alias em="emacsclient -nw -c -a 'nvim'"
 
 #If the shell is interactive run neofetch
 if status --is-interactive

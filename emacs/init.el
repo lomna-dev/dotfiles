@@ -1,24 +1,14 @@
 (setq visible-bell 1)
-(menu-bar-mode -1)
+;(menu-bar-mode -1)
 ;; Set line number to relative globally
 (global-display-line-numbers-mode 1)
 (setq display-line-numbers-type 'relative)
 
-;; Stuff added by emacs when installing packages
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   '("db5b906ccc66db25ccd23fc531a213a1afb500d717125d526d8ff67df768f2fc" default))
- '(package-selected-packages '(nano-theme counsel ivy)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+;; Installing ivy, counsel and swiper
+(add-to-list 'load-path "~/.emacs.d/swiper")
+(require 'ivy)
+(require 'counsel)
+(require 'swiper)
 
 ;; Keybindings for ivy-counsel
 (ivy-mode)
@@ -64,4 +54,4 @@
 (global-set-key "\C-x{" 'v-resize)
 
 ;; Theme
-(load-theme 'nano-dark)
+;;(load-theme 'nano-dark)
