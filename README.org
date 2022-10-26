@@ -1,0 +1,5 @@
+*** Emacs
+For emacs add the following line to the config file
+#+BEGIN_SRC emacs-lisp
+  (org-babel-load-file "~/.emacs.d/config.org")
+#+END_SRC

@@ -11,5 +11,5 @@ alias em="emacsclient -nw -c -a 'nvim'"
 
 #If the shell is interactive run neofetch
 if status --is-interactive
-	$HOME/Documents/pfetch/pfetch
+   awk '(NR==13){exit} {print "\033[34m" "\033[1m" substr($0,2)}' $HOME/.zshrc
 end

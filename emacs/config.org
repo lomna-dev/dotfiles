@@ -1,0 +1,102 @@
+*** Basic Emacs Config
+#+BEGIN_SRC emacs-lisp
+(setq visible-bell 1)
+(tool-bar-mode -1)
+;; Set line number to relative globally
+(global-display-line-numbers-mode 1)
+(setq display-line-numbers-type 'relative)
+#+END_SRC
+
+*** Installing Packages
+#+BEGIN_SRC emacs-lisp
+;; Installing ivy, counsel ,swiper and which-key
+;; which-key is single .el file. Delete it to remove from emacs.
+(add-to-list 'load-path "~/.emacs.d/swiper")
+(require 'ivy)
+(require 'counsel)
+(require 'swiper)
+(require 'which-key)
+#+END_SRC
+
+*** Custom Functions
+#+BEGIN_SRC emacs-lisp
+;; Function to resize window
+(defun v-resize (key)
+  "interactively resize the window" 
+  (interactive "cHit '['/']' to enlarge/shrink vertically and '{'/'}' for horizontally")
+  (cond
+   ((eq key (string-to-char "["))
+    (enlarge-window 1)
+    (call-interactively 'v-resize))
+   ((eq key (string-to-char "]"))
+    (enlarge-window -1)
+    (call-interactively 'v-resize))
+   ((eq key (string-to-char "{"))
+    (shrink-window-horizontally 1)
+    (call-interactively 'v-resize))
+   ((eq key (string-to-char "}"))
+    (enlarge-window-horizontally 1)
+    (call-interactively 'v-resize))
+   (t (push key unread-command-events))))
+#+END_SRC
+
+*** Keybindings
+***** Keybindings for ivy, counsel and swiper
+#+BEGIN_SRC emacs-lisp
+;; Keybindings for ivy-counsel
+(ivy-mode)
+(setq ivy-use-virtual-buffers t)
+(setq enable-recursive-minibuffers t)
+(global-set-key "\C-s" 'swiper)
+(global-set-key (kbd "C-c C-r") 'ivy-resume)
+(global-set-key (kbd "<f6>") 'ivy-resume)
+(global-set-key (kbd "M-x") 'counsel-M-x)
+(global-set-key (kbd "C-x C-f") 'counsel-find-file)
+(global-set-key (kbd "<f1> f") 'counsel-describe-function)
+(global-set-key (kbd "<f1> v") 'counsel-describe-variable)
+(global-set-key (kbd "<f1> o") 'counsel-describe-symbol)
+(global-set-key (kbd "<f1> l") 'counsel-find-library)
+(global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
+(global-set-key (kbd "<f2> u") 'counsel-unicode-char)
+(global-set-key (kbd "C-c g") 'counsel-git)
+(global-set-key (kbd "C-c j") 'counsel-git-grep)
+(global-set-key (kbd "C-c k") 'counsel-ag)
+(global-set-key (kbd "C-x l") 'counsel-locate)
+(global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
+(define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
+#+END_SRC
+
+***** Keybindings for custom functions
+#+BEGIN_SRC emacs-lisp
+(global-set-key "\C-x{" 'v-resize)
+#+END_SRC
+
+*** Appearance
+#+BEGIN_SRC emacs-lisp
+(which-key-mode)
+;; Setting font
+(set-face-attribute 'default nil
+                    :family "VictorMono NFM"
+                    :height 150
+                    :weight 'normal
+                    :width 'normal)
+#+END_SRC
+
+*** ORG-Mode Settings
+#+BEGIN_SRC emacs-lisp
+;; TODO : Make a function to toggle org-hide variables
+;(setq org-hide-block-startup t)
+;(setq org-hide-macro-markers t)
+;(setq org-hide-emphasis-markers t)
+;(setq org-hide-leading-stars t)
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(org-level-1 ((t (:inherit outline-1 :height 2.0))))
+ '(org-level-2 ((t (:inherit outline-2 :height 1.8))))
+ '(org-level-3 ((t (:inherit outline-3 :height 1.6))))
+ '(org-level-4 ((t (:inherit outline-4 :height 1.4))))
+ '(org-level-5 ((t (:inherit outline-5 :height 1.2)))))
+#+END_SRC
