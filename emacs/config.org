@@ -1,102 +1,207 @@
+#+AUTHOR: Anmol Nawani
+#+TITLE: Emacs Configuration
+
 *** Basic Emacs Config
 #+BEGIN_SRC emacs-lisp
-(setq visible-bell 1)
-(tool-bar-mode -1)
-;; Set line number to relative globally
-(global-display-line-numbers-mode 1)
-(setq display-line-numbers-type 'relative)
+  (setq visible-bell 1)
+  (tool-bar-mode -1)
+  ;; Set line number to relative globally
+  (global-display-line-numbers-mode 1)
+  (setq display-line-numbers-type 'relative)
 #+END_SRC
 
 *** Installing Packages
 #+BEGIN_SRC emacs-lisp
-;; Installing ivy, counsel ,swiper and which-key
-;; which-key is single .el file. Delete it to remove from emacs.
-(add-to-list 'load-path "~/.emacs.d/swiper")
-(require 'ivy)
-(require 'counsel)
-(require 'swiper)
-(require 'which-key)
+  ;; Installing ivy, counsel ,swiper and which-key
+  ;; which-key is single .el file. Delete it to remove from emacs.
+  (add-to-list 'load-path "~/.emacs.d/swiper")
+  (require 'ivy)
+  (require 'counsel)
+  (require 'swiper)
+  (require 'which-key)
 #+END_SRC
 
 *** Custom Functions
 #+BEGIN_SRC emacs-lisp
-;; Function to resize window
-(defun v-resize (key)
-  "interactively resize the window" 
-  (interactive "cHit '['/']' to enlarge/shrink vertically and '{'/'}' for horizontally")
-  (cond
-   ((eq key (string-to-char "["))
-    (enlarge-window 1)
-    (call-interactively 'v-resize))
-   ((eq key (string-to-char "]"))
-    (enlarge-window -1)
-    (call-interactively 'v-resize))
-   ((eq key (string-to-char "{"))
-    (shrink-window-horizontally 1)
-    (call-interactively 'v-resize))
-   ((eq key (string-to-char "}"))
-    (enlarge-window-horizontally 1)
-    (call-interactively 'v-resize))
-   (t (push key unread-command-events))))
+  ;; Function to resize window
+  (defun v-resize (key)
+    "interactively resize the window" 
+    (interactive "cHit '['/']' to enlarge/shrink vertically and '{'/'}' for horizontally")
+    (cond
+     ((eq key (string-to-char "["))
+      (enlarge-window 1)
+      (call-interactively 'v-resize))
+     ((eq key (string-to-char "]"))
+      (enlarge-window -1)
+      (call-interactively 'v-resize))
+     ((eq key (string-to-char "{"))
+      (shrink-window-horizontally 1)
+      (call-interactively 'v-resize))
+     ((eq key (string-to-char "}"))
+      (enlarge-window-horizontally 1)
+      (call-interactively 'v-resize))
+     (t (push key unread-command-events))))
+
+  ;; TODO : Function to toggle org symbols
+					  ;(defun org-view-toggle ()
+					  ;  (if org-hide-leading-stars
+					  ;	(progn
+					  ;	  (setq org-hide-block-startup nil)       
+					  ;	  (setq org-hide-macro-markers nil)       
+					  ;	  (setq org-hide-emphasis-markers nil)    
+					  ;	  (setq org-hide-leading-stars nil))
+					  ;
+					  ;    (progn
+					  ;	(setq org-hide-block-startup t)
+					  ;	(setq org-hide-macro-markers t)       
+					  ;	(setq org-hide-emphasis-markers t)    
+					  ;	(setq org-hide-leading-stars t)))
+
 #+END_SRC
 
 *** Keybindings
 ***** Keybindings for ivy, counsel and swiper
 #+BEGIN_SRC emacs-lisp
-;; Keybindings for ivy-counsel
-(ivy-mode)
-(setq ivy-use-virtual-buffers t)
-(setq enable-recursive-minibuffers t)
-(global-set-key "\C-s" 'swiper)
-(global-set-key (kbd "C-c C-r") 'ivy-resume)
-(global-set-key (kbd "<f6>") 'ivy-resume)
-(global-set-key (kbd "M-x") 'counsel-M-x)
-(global-set-key (kbd "C-x C-f") 'counsel-find-file)
-(global-set-key (kbd "<f1> f") 'counsel-describe-function)
-(global-set-key (kbd "<f1> v") 'counsel-describe-variable)
-(global-set-key (kbd "<f1> o") 'counsel-describe-symbol)
-(global-set-key (kbd "<f1> l") 'counsel-find-library)
-(global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
-(global-set-key (kbd "<f2> u") 'counsel-unicode-char)
-(global-set-key (kbd "C-c g") 'counsel-git)
-(global-set-key (kbd "C-c j") 'counsel-git-grep)
-(global-set-key (kbd "C-c k") 'counsel-ag)
-(global-set-key (kbd "C-x l") 'counsel-locate)
-(global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
-(define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
+  ;; Keybindings for ivy-counsel
+  (ivy-mode)
+  (setq ivy-use-virtual-buffers t)
+  (setq enable-recursive-minibuffers t)
+  (global-set-key "\C-s" 'swiper)
+  (global-set-key (kbd "C-c C-r") 'ivy-resume)
+  (global-set-key (kbd "<f6>") 'ivy-resume)
+  (global-set-key (kbd "M-x") 'counsel-M-x)
+  (global-set-key (kbd "C-x C-f") 'counsel-find-file)
+  (global-set-key (kbd "<f1> f") 'counsel-describe-function)
+  (global-set-key (kbd "<f1> v") 'counsel-describe-variable)
+  (global-set-key (kbd "<f1> o") 'counsel-describe-symbol)
+  (global-set-key (kbd "<f1> l") 'counsel-find-library)
+  (global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
+  (global-set-key (kbd "<f2> u") 'counsel-unicode-char)
+  (global-set-key (kbd "C-c g") 'counsel-git)
+  (global-set-key (kbd "C-c j") 'counsel-git-grep)
+  (global-set-key (kbd "C-c k") 'counsel-ag)
+  (global-set-key (kbd "C-x l") 'counsel-locate)
+  (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
+  (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
 #+END_SRC
 
 ***** Keybindings for custom functions
 #+BEGIN_SRC emacs-lisp
-(global-set-key "\C-x{" 'v-resize)
+  (global-set-key "\C-x{" 'v-resize)
+  (global-set-key "\C-cv" 'org-view-toggle)
 #+END_SRC
 
 *** Appearance
 #+BEGIN_SRC emacs-lisp
-(which-key-mode)
-;; Setting font
-(set-face-attribute 'default nil
-                    :family "VictorMono NFM"
-                    :height 150
-                    :weight 'normal
-                    :width 'normal)
+  (which-key-mode)
+  ;; Setting font
+  (set-face-attribute 'default nil
+		      :family "VictorMono NFM"
+		      :height 150
+		      :weight 'normal
+		      :width 'normal)
+
+  ;; Setting default theme
+  (load-theme 'misterioso)
 #+END_SRC
 
 *** ORG-Mode Settings
 #+BEGIN_SRC emacs-lisp
-;; TODO : Make a function to toggle org-hide variables
-;(setq org-hide-block-startup t)
-;(setq org-hide-macro-markers t)
-;(setq org-hide-emphasis-markers t)
-;(setq org-hide-leading-stars t)
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(org-level-1 ((t (:inherit outline-1 :height 2.0))))
- '(org-level-2 ((t (:inherit outline-2 :height 1.8))))
- '(org-level-3 ((t (:inherit outline-3 :height 1.6))))
- '(org-level-4 ((t (:inherit outline-4 :height 1.4))))
- '(org-level-5 ((t (:inherit outline-5 :height 1.2)))))
+  (custom-set-faces
+   ;; custom-set-faces was added by Custom.
+   ;; If you edit it by hand, you could mess it up, so be careful.
+   ;; Your init file should contain only one such instance.
+   ;; If there is more than one, they won't work right.
+   '(org-level-1 ((t (:inherit outline-1 :height 2.0))))
+   '(org-level-2 ((t (:inherit outline-2 :height 1.8))))
+   '(org-level-3 ((t (:inherit outline-3 :height 1.6))))
+   '(org-level-4 ((t (:inherit outline-4 :height 1.4))))
+   '(org-level-5 ((t (:inherit outline-5 :height 1.2)))))
+#+END_SRC
+
+*** Eshell Prompt
+
+Taken from [[https://kirang.in/post/eshell-prompt-setup/][here]]
+
+#+BEGIN_SRC emacs-lisp
+  (defun curr-dir-git-branch-string (pwd)
+    "Returns current git branch as a string, or the empty string if
+  PWD is not in a git repo (or the git command is not found)."
+    (interactive)
+    (when (and (eshell-search-path "git")
+	       (locate-dominating-file pwd ".git"))
+      (let ((git-output (shell-command-to-string (concat "cd " pwd " && git branch | grep '\\*' | sed -e 's/^\\* //'"))))
+	(if (> (length git-output) 0)
+	    (concat " :" (substring git-output 0 -1))
+	  "(no branch)"))))
+
+  (defun pwd-replace-home (pwd)
+    "Replace home in PWD with tilde (~) character."
+    (interactive)
+    (let* ((home (expand-file-name (getenv "HOME")))
+	   (home-len (length home)))
+      (if (and
+	   (>= (length pwd) home-len)
+	   (equal home (substring pwd 0 home-len)))
+	  (concat "~" (substring pwd home-len))
+	pwd)))
+
+  (defun pwd-shorten-dirs (pwd)
+    "Shorten all directory names in PWD except the last two."
+    (let ((p-lst (split-string pwd "/")))
+      (if (> (length p-lst) 2)
+	  (concat
+	   (mapconcat (lambda (elm) (if (zerop (length elm)) ""
+				      (substring elm 0 1)))
+		      (butlast p-lst 2)
+		      "/")
+	   "/"
+	   (mapconcat (lambda (elm) elm)
+		      (last p-lst 2)
+		      "/"))
+	pwd  ;; Otherwise, we just return the PWD
+	)))
+
+  (defun split-directory-prompt (directory)
+    "Break up the directory into a 'parent' and a 'base'"
+    (if (string-match-p ".*/.*" directory)
+	(list (file-name-directory directory) (file-name-base directory))
+      (list "" directory)))
+
+  ;; Create a custom prompt using the functions above
+  (setq eshell-prompt-function
+	(lambda ()
+	  (let* ((directory (split-directory-prompt (pwd-shorten-dirs (pwd-replace-home (eshell/pwd)))))
+		 (parent (car directory))
+		 (name (cadr directory))
+		 (branch (or (curr-dir-git-branch-string (eshell/pwd)) "")))
+
+	    (if (eq 'dark (frame-parameter nil 'background-mode))
+		(concat   ;; Prompt for Dark Themes
+		 (propertize parent 'face `(:foreground "#8888FF"))
+		 (propertize name   'face `(:foreground "#8888FF" :weight bold))
+		 (propertize branch 'face `(:foreground "green"))
+		 (propertize " λ"   'face `(:weight ultra-bold))
+		 (propertize " "    'face `(:weight bold)))
+
+	      (concat    ;; Prompt for Light Themes
+	       (propertize parent 'face `(:foreground "blue"))
+	       (propertize name   'face `(:foreground "blue" :weight bold))
+	       (propertize branch 'face `(:foreground "dark green"))
+	       (propertize " λ"   'face `(:weight ultra-bold))
+	       (propertize " "    'face `(:weight bold)))))))
+
+  ;; Set this to match eshell-prompt-function
+  (setq eshell-prompt-regexp " λ ")
+
+  ;; Make C-a go to beginning of command instead of line
+  (add-hook 'eshell-mode-hook '(lambda ()
+				 (local-set-key (kbd "C-a")
+						'(lambda ()
+						   (interactive)
+						   (beginning-of-line)
+						   (search-forward-regexp eshell-prompt-regexp)))))
+
+  ;; Turn off the default prompt.
+  (setq eshell-highlight-prompt nil)
 #+END_SRC
