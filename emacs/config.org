@@ -1,27 +1,39 @@
 #+AUTHOR: Anmol Nawani
 #+TITLE: Emacs Configuration
 
-*** Basic Emacs Config
+** Basic Emacs Config
 #+BEGIN_SRC emacs-lisp
   (setq visible-bell 1)
   (tool-bar-mode -1)
   ;; Set line number to relative globally
   (global-display-line-numbers-mode 1)
   (setq display-line-numbers-type 'relative)
+
+  ;; Set the auto generated code to another file
+  (setq custom-file (concat user-emacs-directory "autogen-custom.el"))
+  (when (file-exists-p custom-file)
+    (load custom-file))
+
+  ;; Fold long lines
+  (global-visual-line-mode)  
 #+END_SRC
 
-*** Installing Packages
+** Installing Packages
 #+BEGIN_SRC emacs-lisp
-  ;; Installing ivy, counsel ,swiper and which-key
-  ;; which-key is single .el file. Delete it to remove from emacs.
-  (add-to-list 'load-path "~/.emacs.d/swiper")
-  (require 'ivy)
-  (require 'counsel)
-  (require 'swiper)
-  (require 'which-key)
+  (require 'package)
+  (package-initialize)
+
+  ;; Adding Melpa
+  ;; (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+  (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+  (package-refresh-contents)
+
+  ;; Add all packages to install in this list
+  (setq package-selected-packages '(ace-window corfu cape dashboard god-mode ivy counsel swiper which-key htmlize magit))
+  (package-install-selected-packages 't)
 #+END_SRC
 
-*** Custom Functions
+** Custom Functions
 #+BEGIN_SRC emacs-lisp
   ;; Function to resize window
   (defun v-resize (key)
@@ -59,44 +71,20 @@
 
 #+END_SRC
 
-*** Keybindings
-***** Keybindings for ivy, counsel and swiper
-#+BEGIN_SRC emacs-lisp
-  ;; Keybindings for ivy-counsel
-  (ivy-mode)
-  (setq ivy-use-virtual-buffers t)
-  (setq enable-recursive-minibuffers t)
-  (global-set-key "\C-s" 'swiper)
-  (global-set-key (kbd "C-c C-r") 'ivy-resume)
-  (global-set-key (kbd "<f6>") 'ivy-resume)
-  (global-set-key (kbd "M-x") 'counsel-M-x)
-  (global-set-key (kbd "C-x C-f") 'counsel-find-file)
-  (global-set-key (kbd "<f1> f") 'counsel-describe-function)
-  (global-set-key (kbd "<f1> v") 'counsel-describe-variable)
-  (global-set-key (kbd "<f1> o") 'counsel-describe-symbol)
-  (global-set-key (kbd "<f1> l") 'counsel-find-library)
-  (global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
-  (global-set-key (kbd "<f2> u") 'counsel-unicode-char)
-  (global-set-key (kbd "C-c g") 'counsel-git)
-  (global-set-key (kbd "C-c j") 'counsel-git-grep)
-  (global-set-key (kbd "C-c k") 'counsel-ag)
-  (global-set-key (kbd "C-x l") 'counsel-locate)
-  (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
-  (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
-#+END_SRC
+** Keybindings
 
-***** Keybindings for custom functions
+*** Keybindings for custom functions
 #+BEGIN_SRC emacs-lisp
   (global-set-key "\C-x{" 'v-resize)
   (global-set-key "\C-cv" 'org-view-toggle)
 #+END_SRC
 
-*** Appearance
+** Appearance
 #+BEGIN_SRC emacs-lisp
-  (which-key-mode)
+  
   ;; Setting font
   (set-face-attribute 'default nil
-		      :family "VictorMono NFM"
+		      :family "Victor Mono"
 		      :height 150
 		      :weight 'normal
 		      :width 'normal)
@@ -105,7 +93,7 @@
   (load-theme 'misterioso)
 #+END_SRC
 
-*** ORG-Mode Settings
+** ORG-Mode Settings
 #+BEGIN_SRC emacs-lisp
   (custom-set-faces
    ;; custom-set-faces was added by Custom.
@@ -119,7 +107,7 @@
    '(org-level-5 ((t (:inherit outline-5 :height 1.2)))))
 #+END_SRC
 
-*** Eshell Prompt
+** Eshell Prompt
 
 Taken from [[https://kirang.in/post/eshell-prompt-setup/][here]]
 
@@ -204,4 +192,87 @@ Taken from [[https://kirang.in/post/eshell-prompt-setup/][here]]
 
   ;; Turn off the default prompt.
   (setq eshell-highlight-prompt nil)
+#+END_SRC
+
+** Package Specific Configs
+
+*** Dashboard
+#+BEGIN_SRC emacs-lisp
+  (require 'dashboard)
+  (dashboard-setup-startup-hook)
+  (setq dashboard-startup-banner 'logo)
+  (setq dashboard-center-content t)
+#+END_SRC
+
+*** God-mode
+#+BEGIN_SRC emacs-lisp
+  (require 'god-mode)
+  (god-mode)
+
+  ;; Ensure god-mode works on all buffers
+  (setq god-exempt-major-modes nil)
+  (setq god-exempt-predicates nil)
+
+  ;; Keybinding to enable god mode on a buffer
+  (global-set-key (kbd "<escape>") #'god-mode-all)
+  (define-key god-local-mode-map (kbd "i") #'god-local-mode)
+#+END_SRC
+
+*** Ivy, counsel and swiper
+#+BEGIN_SRC emacs-lisp
+  ;; Keybindings for ivy-counsel
+  (ivy-mode)
+  (setq ivy-use-virtual-buffers t)
+  (setq enable-recursive-minibuffers t)
+  (global-set-key "\C-s" 'swiper)
+  (global-set-key (kbd "C-c C-r") 'ivy-resume)
+  (global-set-key (kbd "<f6>") 'ivy-resume)
+  (global-set-key (kbd "M-x") 'counsel-M-x)
+  (global-set-key (kbd "C-x C-f") 'counsel-find-file)
+  (global-set-key (kbd "<f1> f") 'counsel-describe-function)
+  (global-set-key (kbd "<f1> v") 'counsel-describe-variable)
+  (global-set-key (kbd "<f1> o") 'counsel-describe-symbol)
+  (global-set-key (kbd "<f1> l") 'counsel-find-library)
+  (global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
+  (global-set-key (kbd "<f2> u") 'counsel-unicode-char)
+  (global-set-key (kbd "C-c g") 'counsel-git)
+  (global-set-key (kbd "C-c j") 'counsel-git-grep)
+  (global-set-key (kbd "C-c k") 'counsel-ag)
+  (global-set-key (kbd "C-x l") 'counsel-locate)
+  (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
+  (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
+#+END_SRC
+
+*** Ace-window
+#+BEGIN_SRC emacs-lisp
+  (global-set-key "\M-o" 'ace-window)
+#+END_SRC
+
+*** Which-Key
+#+BEGIN_SRC emacs-lisp
+  (which-key-mode)
+  (which-key-enable-god-mode-support)
+#+END_SRC
+
+*** Corfu
+#+BEGIN_SRC emacs-lisp
+  (global-corfu-mode)
+  (setq corfu-auto t)
+  (setq corfu-auto-prefix 1)
+#+END_SRC
+
+*** Cape
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'completion-at-point-functions #'cape-dabbrev)
+  (add-to-list 'completion-at-point-functions #'cape-file)
+  ;;(add-to-list 'completion-at-point-functions #'cape-history)
+  ;;(add-to-list 'completion-at-point-functions #'cape-keyword)
+  ;;(add-to-list 'completion-at-point-functions #'cape-tex)
+  ;;(add-to-list 'completion-at-point-functions #'cape-sgml)
+  ;;(add-to-list 'completion-at-point-functions #'cape-rfc1345)
+  ;;(add-to-list 'completion-at-point-functions #'cape-abbrev)
+  ;;(add-to-list 'completion-at-point-functions #'cape-ispell)
+  ;;(add-to-list 'completion-at-point-functions #'cape-dict)
+  ;;(add-to-list 'completion-at-point-functions #'cape-symbol)
+  ;;(add-to-list 'completion-at-point-functions #'cape-line)
 #+END_SRC
