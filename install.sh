@@ -8,8 +8,9 @@ ln -s $PWD/awesome/custom-widget/battery.lua $HOME/.config/awesome/custom-widget
 
 # Emacs
 mkdir $HOME/.emacs.d
-cp -r $PWD/emacs/swiper $HOME/.emacs.d/swiper
+cp $PWD/emacs/autogen-custom.el $HOME/.emacs.d/autogen-custom.el
 ln -s $PWD/emacs/config.org $HOME/.emacs.d/config.org
+ln -s $PWD/emacs/init.el $HOME/.emacs.d/init.el
 
 # Fish
 mkdir $HOME/.config/fish
