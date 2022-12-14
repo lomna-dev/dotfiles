@@ -1,16 +1,10 @@
-#             _.-````'-,_
-#   _,.,_ ,-'`           `'-.,_
-# /)     (\                   '``-.
-#((      ) )                      `\
-# \)    (_/                        )\
-#  |       /)           '    ,'    / \
-#  `\    ^'            '     (    /  ))
-#    |      _/\ ,     /    ,,`\   (  "`
-#     \Y,   |  \  \  | ````| / \_ \
-#       `)_/    \  \  )    ( >  ( >
-#                \( \(     |/   |/
-#                /_(/_(    /_(  /_(
-#
+#       (((( 
+#          )))) 
+#       _ .---. 
+#      ( |`---'| 
+#       \|     | 
+#       : .___, : 
+#        `-----'
 
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
@@ -29,8 +23,8 @@ compinit
 
 # If is login shell
 if [[ -o login ]]; then
-    source $HOME/emsdk/emsdk_env.sh
-    source $HOME/.cargo/env
+    source $HOME/emsdk/emsdk_env.sh > /dev/null 2>&1 # Emscripten
+    source $HOME/.cargo/env > /dev/null 2>&1 # Rust
 fi
 
 # Aliases
@@ -39,7 +33,7 @@ alias ls="ls --color=auto"
 
 # If is interactive
 if [[ -o interactive ]]; then
-    awk '(NR==13){exit} {print "\033[34m" "\033[1m" substr($0,2)}' $HOME/.zshrc
+    awk '(NR==8){exit} {print "\033[34m" "\033[1m" substr($0,2)}' $HOME/.zshrc
     PS1="%B%n@%m%k %F{cyan}%(4~|...|)%3~%F{white} ζ %b"
 fi
 

@@ -1,4 +1,10 @@
+* Anmol's config files
+
+** My Shell configs
+I use both fish and zsh shells and keep them both them.
+
 *** Emacs
+
 For emacs add the following line to the config file
 #+BEGIN_SRC emacs-lisp
   (org-babel-load-file "~/.emacs.d/config.org")

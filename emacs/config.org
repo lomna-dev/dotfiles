@@ -77,7 +77,6 @@
    
 *** Keybindings for custom functions
     #+BEGIN_SRC emacs-lisp
-  (global-set-key "\C-x{" 'v-resize)
   (global-set-key "\C-x[" 'v-resize)
   (global-set-key "\C-cv" 'org-view-toggle)
     #+END_SRC
@@ -207,16 +206,48 @@
   (setq dashboard-center-content t)
     #+END_SRC
 
+*** EXWM
+    #+BEGIN_SRC emacs-lisp
+    (defun my-exwm-argument-fn (switch)
+        (message "Starting exwm")
+	(setq inhibit-startup-screen t)
+	(require 'exwm)
+
+	;; Load the deafult exwm config
+	(require 'exwm-config)
+	(exwm-config-default)
+
+	;; Set monitor resolution
+	(require 'exwm-randr)
+	(setq exwm-randr-workspace-output-plist '(0 "eDP-1"))
+	(add-hook 'exwm-randr-screen-change-hook
+	    (lambda ()
+                (start-process-shell-command 
+		"xrandr" nil "xrandr --output eDP-1 --mode 1920x1080 --pos 0x0 --rotate normal")))
+	(exwm-randr-enable)
+
+	;; Enable the system tray
+	(require 'exwm-systemtray)
+	(exwm-systemtray-enable)
+
+	(display-time-mode)
+	(display-battery-mode)
+	;; Start the network manager applet
+        (start-process "nm-applet" nil "nm-applet"))
+
+    (add-to-list 'command-switch-alist '("--exwm" . my-exwm-argument-fn))
+    #+END_SRC  
+
 *** God-mode
     #+BEGIN_SRC emacs-lisp
   (require 'god-mode)
   (god-mode)
 
-  ;; Ensure god-mode works on all buffers
-  (setq god-exempt-major-modes nil)
-  (setq god-exempt-predicates nil)
+  ;; Ensure god-mode works on all buffers including dired, magit, eshell etc.
+  ;;(setq god-exempt-major-modes nil)
+  ;;(setq god-exempt-predicates nil)
 
-  ;; Keybinding to enable god mode on a buffer
+  ;; Keybinding to enable god mode on and off using ESC and i
   (global-set-key (kbd "<escape>") #'god-mode-all)
   (define-key god-local-mode-map (kbd "i") #'god-local-mode)
     #+END_SRC
