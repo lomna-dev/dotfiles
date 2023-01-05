@@ -20,6 +20,10 @@ ln -s $PWD/fish/fish_variables $HOME/.config/fish/fish_variables
 ln -s $PWD/fish/functions/fish_prompt.fish $HOME/.config/fish/functions/fish_prompt.fish
 ln -s $PWD/fish/functions/fish_right_prompt.fish $HOME/.config/fish/functions/fish_right_prompt.fish
 
+# Fonts
+cp -r $PWD/fonts/VictorMono/VictorMono/ActuallyGoodOS $HOME/.local/share/fonts/
+fc-cache
+
 # Konsole
 cp -r $PWD/konsole $HOME/.local/share
  
@@ -35,3 +39,4 @@ ln -s $PWD/urxvt/.Xdefaults $HOME/.Xdefaults
 
 # ZSH
 ln -s $PWD/zsh/.zshrc $HOME/.zshrc
+ln -s $PWD/zsh/.zshenv $HOME/.zshenv 

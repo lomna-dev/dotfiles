@@ -1,6 +1,14 @@
 #+AUTHOR: Anmol Nawani
 #+TITLE: Emacs Configuration
 
+** How To in Emacs
+*** How to modify PATH variable in emacs
+    To modify PATH within emacs and not the whole system, put these lines in config.
+    Here, /sw/bin is being added to the PATH. This can be useful when adding PATH for a programming language.
+
+    (setenv "PATH" (concat (getenv "PATH") ":/sw/bin"))
+    (setq exec-path (append exec-path '("/sw/bin")))
+
 ** Basic Emacs Config
    #+BEGIN_SRC emacs-lisp
   (setq visible-bell 1)
@@ -55,22 +63,6 @@
       (enlarge-window-horizontally 1)
       (call-interactively 'v-resize))
      (t (push key unread-command-events))))
-
-  ;; TODO : Function to toggle org symbols
-					  ;(defun org-view-toggle ()
-					  ;  (if org-hide-leading-stars
-					  ;	(progn
-					  ;	  (setq org-hide-block-startup nil)       
-					  ;	  (setq org-hide-macro-markers nil)       
-					  ;	  (setq org-hide-emphasis-markers nil)    
-					  ;	  (setq org-hide-leading-stars nil))
-					  ;
-					  ;    (progn
-					  ;	(setq org-hide-block-startup t)
-					  ;	(setq org-hide-macro-markers t)       
-					  ;	(setq org-hide-emphasis-markers t)    
-					  ;	(setq org-hide-leading-stars t)))
-
    #+END_SRC
 
 ** Keybindings
@@ -78,7 +70,6 @@
 *** Keybindings for custom functions
     #+BEGIN_SRC emacs-lisp
   (global-set-key "\C-x[" 'v-resize)
-  (global-set-key "\C-cv" 'org-view-toggle)
   (global-set-key "\C-x&" 'recompile)
     #+END_SRC
 

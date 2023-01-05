@@ -21,3 +21,4 @@ rm $HOME/.Xdefaults
 
 # ZSH
 rm $HOME/.zshrc
+rm $HOME/.zshenv
