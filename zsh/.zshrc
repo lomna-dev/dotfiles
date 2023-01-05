@@ -16,15 +16,13 @@ bindkey -e
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
 zstyle :compinstall filename '/home/anmol/.zshrc'
-
 autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
 # If is login shell
 if [[ -o login ]]; then
-    source $HOME/emsdk/emsdk_env.sh > /dev/null 2>&1 # Emscripten
-    source $HOME/.cargo/env > /dev/null 2>&1 # Rust
+    echo "Welcome"
 fi
 
 # Aliases

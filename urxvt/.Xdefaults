@@ -239,5 +239,5 @@
 
 URxvt*scrollWithBuffer: true
 URxvt.scrollBar:        false
-URxvt.font:             xft:FantasqueSansMono Nerd Font Mono:pixelsize=28
+URxvt.font:             xft:VictorMono Nerd Font:pixelsize=28
 URxvt.depth:            32
