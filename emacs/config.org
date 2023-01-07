@@ -2,17 +2,20 @@
 #+TITLE: Emacs Configuration
 
 ** How To in Emacs
-*** How to modify PATH variable in emacs
-    To modify PATH within emacs and not the whole system, put these lines in config.
-    Here, /sw/bin is being added to the PATH. This can be useful when adding PATH for a programming language.
 
-    (setenv "PATH" (concat (getenv "PATH") ":/sw/bin"))
-    (setq exec-path (append exec-path '("/sw/bin")))
+*** How to modify PATH variable in emacs
+To modify PATH within emacs and not the whole system, put these lines in config.
+Here, /sw/bin is being added to the PATH. This can be useful when adding PATH for a programming language.
+
+(setenv "PATH" (concat (getenv "PATH") ":/sw/bin"))
+(setq exec-path (append exec-path '("/sw/bin")))
 
 ** Basic Emacs Config
-   #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (setq visible-bell 1)
   (tool-bar-mode -1)
+  (scroll-bar-mode -1)
+  (menu-bar-mode -1)
   ;; Set line number to relative globally
   (global-display-line-numbers-mode 1)
   (setq display-line-numbers-type 'relative)
@@ -24,27 +27,26 @@
 
   ;; Fold long lines
   (global-visual-line-mode)  
-   #+END_SRC
+#+END_SRC
 
 ** Installing Packages
-   #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (require 'package)
   (package-initialize)
 
   ;; Adding Melpa
   ;; (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
   (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-
-  (unless package-archive-contents
-    (package-refresh-contents))
+  (package-refresh-contents)
 
   ;; Add all packages to install in this list
-  (setq package-selected-packages '(ace-window corfu cape dashboard god-mode ivy counsel swiper which-key htmlize magit))
-  (package-install-selected-packages)
-   #+END_SRC
+  (setq package-selected-packages
+	'(ace-window corfu cape dashboard doom-themes god-mode ivy counsel swiper which-key htmlize magit))
+  (package-install-selected-packages 't)
+#+END_SRC
 
 ** Custom Functions
-   #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
   ;; Function to resize window
   (defun v-resize (key)
     "interactively resize the window" 
@@ -63,32 +65,32 @@
       (enlarge-window-horizontally 1)
       (call-interactively 'v-resize))
      (t (push key unread-command-events))))
-   #+END_SRC
+#+END_SRC
 
 ** Keybindings
    
 *** Keybindings for custom functions
-    #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (global-set-key "\C-x[" 'v-resize)
   (global-set-key "\C-x&" 'recompile)
-    #+END_SRC
+#+END_SRC
 
 ** Appearance
-   #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
   
   ;; Setting font
   (set-face-attribute 'default nil
- 		      :family "VictorMono Nerd Font"
- 		      :height 150
- 		      :weight 'normal
- 		      :width 'normal)
+		      :family "VictorMono Nerd Font"
+		      :height 150
+		      :weight 'normal
+		      :width 'normal)
 
   ;; Setting default theme
-  (load-theme 'misterioso)
-   #+END_SRC
+  (load-theme 'doom-challenger-deep 't)
+#+END_SRC
 
 ** ORG-Mode Settings
-   #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (custom-set-faces
    ;; custom-set-faces was added by Custom.
    ;; If you edit it by hand, you could mess it up, so be careful.
@@ -99,13 +101,13 @@
    '(org-level-3 ((t (:inherit outline-3 :height 1.6))))
    '(org-level-4 ((t (:inherit outline-4 :height 1.4))))
    '(org-level-5 ((t (:inherit outline-5 :height 1.2)))))
-   #+END_SRC
+#+END_SRC
 
 ** Eshell Prompt
 
-   Taken from [[https://kirang.in/post/eshell-prompt-setup/][here]]
+Taken from [[https://kirang.in/post/eshell-prompt-setup/][here]]
 
-   #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (defun curr-dir-git-branch-string (pwd)
     "Returns current git branch as a string, or the empty string if
   PWD is not in a git repo (or the git command is not found)."
@@ -186,53 +188,51 @@
 
   ;; Turn off the default prompt.
   (setq eshell-highlight-prompt nil)
-   #+END_SRC
+#+END_SRC
 
 ** Package Specific Configs
 
 *** Dashboard
-    #+BEGIN_SRC emacs-lisp
-  (require 'dashboard)
+#+BEGIN_SRC emacs-lisp
   (dashboard-setup-startup-hook)
   (setq dashboard-startup-banner 'logo)
   (setq dashboard-center-content t)
-    #+END_SRC
+#+END_SRC
 
 *** EXWM
-    #+BEGIN_SRC emacs-lisp
-    (defun my-exwm-argument-fn (switch)
-        (message "Starting exwm")
-	(setq inhibit-startup-screen t)
-	(require 'exwm)
+#+BEGIN_SRC emacs-lisp
+  (defun my-exwm-argument-fn (switch)
+    (message "Starting exwm")
+    (setq inhibit-startup-screen t)
+    (require 'exwm)
 
-	;; Load the deafult exwm config
-	(require 'exwm-config)
-	(exwm-config-default)
+    ;; Load the deafult exwm config
+    (require 'exwm-config)
+    (exwm-config-default)
 
-	;; Set monitor resolution
-	(require 'exwm-randr)
-	(setq exwm-randr-workspace-output-plist '(0 "eDP-1"))
-	(add-hook 'exwm-randr-screen-change-hook
-	    (lambda ()
-                (start-process-shell-command 
-		"xrandr" nil "xrandr --output eDP-1 --mode 1920x1080 --pos 0x0 --rotate normal")))
-	(exwm-randr-enable)
+    ;; Set monitor resolution
+    (require 'exwm-randr)
+    (setq exwm-randr-workspace-output-plist '(0 "eDP-1"))
+    (add-hook 'exwm-randr-screen-change-hook
+	      (lambda ()
+		(start-process-shell-command 
+		 "xrandr" nil "xrandr --output eDP-1 --mode 1920x1080 --pos 0x0 --rotate normal")))
+    (exwm-randr-enable)
 
-	;; Enable the system tray
-	(require 'exwm-systemtray)
-	(exwm-systemtray-enable)
+    ;; Enable the system tray
+    (require 'exwm-systemtray)
+    (exwm-systemtray-enable)
 
-	(display-time)
-	(display-battery-mode)
-	;; Start the network manager applet
-        (start-process "nm-applet" nil "nm-applet"))
+    (display-time)
+    (display-battery-mode)
+    ;; Start the network manager applet
+    (start-process "nm-applet" nil "nm-applet"))
 
-    (add-to-list 'command-switch-alist '("--exwm" . my-exwm-argument-fn))
-    #+END_SRC  
+  (add-to-list 'command-switch-alist '("--exwm" . my-exwm-argument-fn))
+#+END_SRC  
 
 *** God-mode
-    #+BEGIN_SRC emacs-lisp
-  (require 'god-mode)
+#+BEGIN_SRC emacs-lisp
   (god-mode)
 
   ;; Ensure god-mode works on all buffers including dired, magit, eshell etc.
@@ -242,10 +242,10 @@
   ;; Keybinding to enable god mode on and off using ESC and i
   (global-set-key (kbd "<escape>") #'god-mode-all)
   (define-key god-local-mode-map (kbd "i") #'god-local-mode)
-    #+END_SRC
+#+END_SRC
 
 *** Ivy, counsel and swiper
-    #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
   ;; Keybindings for ivy-counsel
   (ivy-mode)
   (setq ivy-use-virtual-buffers t)
@@ -267,28 +267,28 @@
   (global-set-key (kbd "C-x l") 'counsel-locate)
   (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
   (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
-    #+END_SRC
+#+END_SRC
 
 *** Ace-window
-    #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (global-set-key "\M-o" 'ace-window)
-    #+END_SRC
+#+END_SRC
 
 *** Which-Key
-    #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (which-key-mode)
   (which-key-enable-god-mode-support)
-    #+END_SRC
+#+END_SRC
 
 *** Corfu
-    #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (global-corfu-mode)
   (setq corfu-auto t)
   (setq corfu-auto-prefix 1)
-    #+END_SRC
+#+END_SRC
 
 *** Cape
-    #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (add-to-list 'completion-at-point-functions #'cape-dabbrev)
   (add-to-list 'completion-at-point-functions #'cape-file)
   ;;(add-to-list 'completion-at-point-functions #'cape-history)
@@ -301,4 +301,4 @@
   ;;(add-to-list 'completion-at-point-functions #'cape-dict)
   ;;(add-to-list 'completion-at-point-functions #'cape-symbol)
   ;;(add-to-list 'completion-at-point-functions #'cape-line)
-    #+END_SRC
+#+END_SRC
