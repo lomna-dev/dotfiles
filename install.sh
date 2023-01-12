@@ -9,6 +9,7 @@ ln -s $PWD/awesome/custom-widget/battery.lua $HOME/.config/awesome/custom-widget
 # Emacs
 mkdir $HOME/.emacs.d
 cp $PWD/emacs/autogen-custom.el $HOME/.emacs.d/autogen-custom.el
+cp $PWD/emacs/loopyasiandragonframe.svg $HOME/.emacs.d/loopyasiandragonframe.svg
 ln -s $PWD/emacs/config.org $HOME/.emacs.d/config.org
 ln -s $PWD/emacs/init.el $HOME/.emacs.d/init.el
 
