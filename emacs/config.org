@@ -85,7 +85,7 @@ Here, /sw/bin is being added to the PATH. This can be useful when adding PATH fo
 		      :weight 'normal
 		      :width 'normal)
 
-  ;; Setting default theme
+  ;; Setting defaultx theme
   (load-theme 'doom-challenger-deep 't)
 #+END_SRC
 
@@ -195,7 +195,7 @@ Taken from [[https://kirang.in/post/eshell-prompt-setup/][here]]
 *** Dashboard
 #+BEGIN_SRC emacs-lisp
   (dashboard-setup-startup-hook)
-  (setq dashboard-startup-banner "~/.emacs.d/loopyasiandragonframe.svg")
+  (setq dashboard-startup-banner "~/.emacs.d/banner.svg")
   (setq dashboard-image-banner-max-width 400)
   (setq dashboard-center-content t)
 #+END_SRC

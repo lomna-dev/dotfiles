@@ -1,11 +1,34 @@
 * Anmol's config files
 
 ** My Shell configs
-I use both fish and zsh shells and keep them both them.
+I use both [[https://fishshell.com/][fish]] and [[https://www.zsh.org/][zsh]] shells and maintain both of them (I haven't heavily modify by shells). I also have a .bashrc but it only changes the prompt.
 
-*** Emacs
+** My Window Manager configs
 
-For emacs add the following line to the config file
-#+BEGIN_SRC emacs-lisp
-  (org-babel-load-file "~/.emacs.d/config.org")
-#+END_SRC
+*** Awesome
+I don't use awesome anymore because I switched to wayland. I won't recommend to use my config for awesome. I may even remove from my dotfiles sometime.
+
+*** Sway
+Currently using sway since Hyprland is in beta. The Hyprland version in nixpkgs is also very outdated, so sway is currently acting as a substitute. Though I will switch to Hyprland once it is properly supported by nixpkgs.
+
+*** Waybar
+I use waybar with both sway and hyprland. I don't use workspace numbers, so you might want to avoid my config. Unless you have strange prefrence like mine.
+
+** Font
+I use [[https://rubjo.github.io/victor-mono/][VictorMono]] patched with [[https://www.nerdfonts.com/][Nerd Font]].
+
+** TMUX
+I took tmux config from [[https://github.com/damntrain/dots][damtrain's]] config, the only changes I made is to remove the all the keybinding changes. Though prefix key is still kept changed to C-w since it makes it easier to use tmux in emacs.
+
+** Terminal Emulators
+
+*** URXVT
+The urxvt folder contain's a .Xdefaults files with multiple themes in it. Though I don't use urxvt and now mainly use alacritty.
+
+*** Alacritty
+[[https://alacritty.org/][Alacritty]] doesn't require extensive configuration. I have only changed the color theme and the font.
+
+** Emacs
+I like my emacs to be as close to defaults as possible, while still being practical and good looking. I don't use evil keybindings and instead use [[https://github.com/emacsorphanage/god-mode][god-mode]]. I use [[https://github.com/kiennq/emacs-mini-modeline][mini-modeline]] and [[https://github.com/challenger-deep-theme][challenger-deep]] theme from doom-themes (the [[https://github.com/challenger-deep-theme/emacs][official theme]] which is in melpa doesn't look as good in org documents, though I like it slightly more when working on code so in my personal working config I keep both). \\
+\\
+The preferred way to install packages is using package.el in accordance to my above philosophy when using emacs.

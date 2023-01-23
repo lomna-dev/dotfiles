@@ -6,10 +6,14 @@ mkdir $HOME/.config/awesome/custom-widget
 ln -s $PWD/awesome/rc.lua $HOME/.config/awesome/rc.lua
 ln -s $PWD/awesome/custom-widget/battery.lua $HOME/.config/awesome/custom-widget/battery.lua
 
+# Bash
+ln -s $PWD/bash/.bashrc $HOME/.bashrc
+
 # Emacs
 mkdir $HOME/.emacs.d
 cp $PWD/emacs/autogen-custom.el $HOME/.emacs.d/autogen-custom.el
-cp $PWD/emacs/loopyasiandragonframe.svg $HOME/.emacs.d/loopyasiandragonframe.svg
+cp $PWD/emacs/banner.svg $HOME/.emacs.d/banner.svg
+cp $PWD/emacs/banner-dark.svg $HOME/.emacs.d/banner-dark.svg
 ln -s $PWD/emacs/config.org $HOME/.emacs.d/config.org
 ln -s $PWD/emacs/init.el $HOME/.emacs.d/init.el
 
@@ -25,18 +29,16 @@ ln -s $PWD/fish/functions/fish_right_prompt.fish $HOME/.config/fish/functions/fi
 cp -r $PWD/fonts/VictorMono/VictorMono/ActuallyGoodOS $HOME/.local/share/fonts/
 fc-cache
 
-# Konsole
-cp -r $PWD/konsole $HOME/.local/share
- 
-# Spacemacs
-ln -s $PWD/spacemacs/.spacemacs $HOME/.spacemacs
-
 # TMUX
 mkdir $HOME/.config/tmux
 ln -s $PWD/tmux/tmux.conf $HOME/.config/tmux/tmux.conf
 
 # URXVT
 ln -s $PWD/urxvt/.Xdefaults $HOME/.Xdefaults
+
+# Waybar
+ln -s $PWD/waybar/config $HOME/.config/waybar/config
+ln -s $PWD/waybar/style.css $HOME/.config/waybar/style.css 
 
 # ZSH
 ln -s $PWD/zsh/.zshrc $HOME/.zshrc
