@@ -26,8 +26,12 @@ ln -s $PWD/fish/functions/fish_prompt.fish $HOME/.config/fish/functions/fish_pro
 ln -s $PWD/fish/functions/fish_right_prompt.fish $HOME/.config/fish/functions/fish_right_prompt.fish
 
 # Fonts
-cp -r $PWD/fonts/VictorMono/VictorMono/ActuallyGoodOS $HOME/.local/share/fonts/
+cp -r $PWD/fonts/VictorMonoNFPatched $HOME/.local/share/fonts/
 fc-cache
+
+# Sway
+mkdir $HOME/.config/sway
+ln -s $PWD/sway/config $HOME/.config/sway/config 
 
 # TMUX
 mkdir $HOME/.config/tmux
@@ -37,6 +41,7 @@ ln -s $PWD/tmux/tmux.conf $HOME/.config/tmux/tmux.conf
 ln -s $PWD/urxvt/.Xdefaults $HOME/.Xdefaults
 
 # Waybar
+mkdir $HOME/.config/waybar
 ln -s $PWD/waybar/config $HOME/.config/waybar/config
 ln -s $PWD/waybar/style.css $HOME/.config/waybar/style.css 
 

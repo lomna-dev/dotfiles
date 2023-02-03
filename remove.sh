@@ -10,6 +10,9 @@ rm -r $HOME/.emacs.d
 # Fish
 rm -r $HOME/.config/fish
 
+# Sway
+rm -r $HOME/.config/sway
+
 # TMUX
 rm -r $HOME/.config/tmux
 
@@ -17,7 +20,7 @@ rm -r $HOME/.config/tmux
 rm $HOME/.Xdefaults
 
 # Waybar
-rm $HOME/.config/waybar
+rm -r $HOME/.config/waybar
 
 # ZSH
 rm $HOME/.zshrc

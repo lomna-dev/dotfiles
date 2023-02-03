@@ -20,6 +20,9 @@ Here, /sw/bin is being added to the PATH. This can be useful when adding PATH fo
   (global-display-line-numbers-mode 1)
   (setq display-line-numbers-type 'relative)
 
+  ;; Use Shitft+ArrowKeys to switch windows.
+  (windmove-default-keybindings)
+
   ;; Set the auto generated code to another file
   (setq custom-file (concat user-emacs-directory "autogen-custom.el"))
   (when (file-exists-p custom-file)
@@ -41,7 +44,7 @@ Here, /sw/bin is being added to the PATH. This can be useful when adding PATH fo
 
   ;; Add all packages to install in this list
   (setq package-selected-packages
-	'(ace-window corfu cape dashboard doom-themes god-mode ivy counsel swiper mini-modeline which-key htmlize magit))
+	'(corfu cape dashboard doom-themes god-mode ivy counsel swiper mini-modeline which-key htmlize magit))
   (package-install-selected-packages 't)
 #+END_SRC
 
