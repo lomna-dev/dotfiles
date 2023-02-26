@@ -23,7 +23,7 @@ set $menu wofi --show drun
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in @datadir@/backgrounds/sway/)
-output * bg /home/anmol/Pictures/windows-error.jpg fill
+output * bg /home/anmol/Pictures/xfce2.png fill
 #
 # Example configuration:
 #
